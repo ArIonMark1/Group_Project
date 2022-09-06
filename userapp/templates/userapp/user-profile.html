@@ -1,0 +1,295 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ======= Header ======= -->
+{% include 'userapp/includes/inc_header.html' %}
+
+<!-- ======= Sidebar ======= -->
+{% include 'userapp/includes/inc_sidebar.html' %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Профиль пользователя</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'user:main' %}">Общая информация</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'user:bookings' %}">Мои бронирования</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'user:favorites' %}">Избранное</a></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        {% if messages or form.non_field_errors or form.errors %}
+
+        <div class="alert {% if messages %} alert-success
+                              {% else %} alert-danger
+                              {% endif %} alert-dismissible fade show"
+             role="alert" style="margin-top: 50px;">
+
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+
+            {% for error in form.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img src="
+                            {% if user.avatar %}
+                            {{ user.avatar.url }}
+                            {% else %}
+                            {% static 'userapp/assets/img/profile-img.jpg' %}
+                            {% endif %}" alt="Profile foto"
+                             class="rounded-circle">
+                        <h2>{{ user.get_full_name }}</h2>
+                        <h3>
+                            {% if user.is_landlord %}
+                            Арендодатель
+                            {% else %}
+                            Арендатор
+                            {% endif %}
+                        </h3>
+                        <div class="social-links mt-2">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                        data-bs-target="#profile-overview">Общая информация
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">
+                                    Редактировать профиль
+                                </button>
+                            </li>
+
+                            <!--                                <li class="nav-item">-->
+                            <!--                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">-->
+                            <!--                                        Настройки-->
+                            <!--                                    </button>-->
+                            <!--                                </li>-->
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab"
+                                        data-bs-target="#profile-change-password">Сменить пароль
+                                </button>
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <h5 class="card-title"></h5>
+                                <p class="small fst-italic"></p>
+                                {# --- Данные которые отображаются в общей информации --- #}
+
+                                <h5 class="card-title">Детали профиля</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Фамилия Имя</div>
+                                    <div class="col-lg-9 col-md-8">{{ user.get_full_name }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Город</div>
+                                    <div class="col-lg-9 col-md-8">{{ user.city }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">О себе</div>
+                                    <div class="col-lg-9 col-md-8">{{ user.about }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Статус</div>
+                                    <div class="col-lg-9 col-md-8">
+                                        {% if user.is_landlord %}
+                                        Арендодатель
+                                        {% else %}
+                                        Арендатор
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Телефон</div>
+                                    <div class="col-lg-9 col-md-8"> {{ user.user_phone }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Email</div>
+                                    <div class="col-lg-9 col-md-8">{{ user.email }}</div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                <!-- Profile Edit Form -->
+                                <form action="" method="post" enctype="multipart/form-data">
+
+                                    {% csrf_token %}
+                                    <div class="row mb-3">
+                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Фото
+                                            профиля</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <img src="
+                        {% if user.avatar %}
+                        {{ user.avatar.url }}
+                        {% else %}
+                        {% static 'userapp/assets/img/profile-img.jpg' %}
+                        {% endif %}" alt="Profile">
+                                            <div class="pt-2">
+                                                {{ data_form.avatar }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="firstName" class="col-md-4 col-lg-3 col-form-label">Имя</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            {{ data_form.first_name }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Фамилия</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            {{ data_form.last_name }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">О себе</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            {{ data_form.about }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="city" class="col-md-4 col-lg-3 col-form-label">Город</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            {{ data_form.city }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="user_phone" class="col-md-4 col-lg-3 col-form-label">Телефон</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            {{ data_form.user_phone }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            {{ data_form.email }}
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" name="change_data" class="btn btn-primary">Сохранить
+                                            Изменения
+                                        </button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="profile-settings">
+
+                                <!-- Settings Form -->
+                                <form>
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email
+                                            Notifications</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="changesMade"
+                                                       checked>
+                                                <label class="form-check-label" for="changesMade">
+                                                    Изменения внесены в вашу учетную запись
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="newProducts"
+                                                       checked>
+                                                <label class="form-check-label" for="newProducts">
+                                                    Информация о новых продуктах и услугах
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="proOffers">
+                                                <label class="form-check-label" for="proOffers">
+                                                    Маркетинговые и промо предложения
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="securityNotify"
+                                                       checked disabled>
+                                                <label class="form-check-label" for="securityNotify">
+                                                    Предупреждения безопасности
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Сохранить Изменения</button>
+                                    </div>
+                                </form><!-- End settings Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="profile-change-password">
+                                <!-- Change Password Form -->
+                                {% include 'userapp/includes/change-pass.html' %}
+                                </form><!-- End Change Password Form -->
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+{% include 'userapp/includes/inc_footer.html' %}
+{% endblock %}
+{% block js %}
+
+{% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

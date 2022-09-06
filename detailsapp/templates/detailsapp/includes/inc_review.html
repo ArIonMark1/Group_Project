@@ -1,0 +1,24 @@
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="review-content">
+        <h4 style="text-align: center;">Оставьте свой отзыв</h4>
+        <div class="review-ratings">
+
+            {% for rating_name in rating_names %}
+            <div class="review-rating">
+                <label class="rating-label" for="rating-value{{rating_name.pk}}">{{rating_name.name}}: <i class="rating_num">1</i>
+                    <i class="fas fa-star" style="font-size: 15px; color: gold;"></i>
+                </label>
+                <input id="rating-value{{rating_name.pk}}" name="rating-value{{rating_name.pk}}" type="range" min="1" max="10" step="1" value="1">
+            </div>
+            {% endfor %}
+        </div>
+        <h4>Суммарная оценка: <i class="rating_sum">1</i></h4>
+        <div class="message-area">
+            <textarea class="form-control" name="review-text" rows="6" placeholder="Ваш отзыв"></textarea>
+            <div class="review-btn">
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,53 @@
+{% load static %}
+<nav class="navbar navbar-default bootsnav navbar-fixed no-background white">
+    <div class="container">
+<!--        <div class="attr-nav">-->
+<!--            <ul>-->
+<!--                <li class=""><a href="#Search"><i class="fa fa-search"></i></a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+        <!-- Start Header Navigation -->
+        <div class="navbar-header">
+<!--            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">-->
+<!--                <i class="fa fa-bars"></i>-->
+<!--            </button>-->
+            <a class="navbar-brand" href="{% url 'main' %}">
+                <img src="{% static 'mainapp/assets/images/logo.png' %}" class="logo" alt="">
+                <!--<img src="assets/images/footer-logo.png" class="logo logo-scrolled" alt="">-->
+            </a>
+
+        </div>
+        <!-- End Header Navigation -->
+
+        <!-- navbar menu -->
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                                {% if user.is_landlord %}
+                                <li><a href="{% url 'create:main' %}">Предложить помещения</a></li>
+                                {% endif %}
+                {% endif %}
+
+
+<!--                <li><a href="{% url 'offers:main' %}">Каталог</a></li>-->
+                <!--                <li><a href="{% url 'user:favorites' %}">Мои любимые локации</a></li>-->
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'user:profile' %}">Личный Кабинет</a></li>
+                {% if user.is_staff %}
+                <li><a href="{% url 'admin_staff:main' %}">Админка</a></li>
+                {% endif %}
+                {% else %}
+                <li><a href="{% url 'auth:login' %}">Войти</a></li>
+                {% endif %}
+
+                <!-- <li><a href="#product">Portfolio</a></li> -->
+                <!--                <li><a href="#team">Наша команда</a></li>-->
+                <li><a href="{% url 'feedback:main' %}">Обратная связь</a></li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+
+
+</nav>

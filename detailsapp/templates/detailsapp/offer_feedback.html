@@ -1,0 +1,22 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block css %}
+{% include 'detailsapp/includes/inc_css.html' %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'detailsapp/includes/inc_header.html' %}
+
+{% include 'detailsapp/includes/inc_review.html' %}
+
+{% include 'detailsapp/includes/inc_footer.html' %}
+
+{% endblock %}
+
+{% block js %}
+{% include 'detailsapp/includes/inc_js.html' %}
+<script src="{% static 'detailsapp/assets/js/review.js' %}"></script>
+{% include 'mainapp/includes/inc_js.html' %}
+{% endblock %}

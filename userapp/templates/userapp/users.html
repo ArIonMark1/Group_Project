@@ -1,0 +1,111 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'userapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+      <section class="section profile">
+
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img src="
+                            {% if this_user.avatar %}
+                            {{ this_user.avatar.url }}
+                            {% else %}
+                            {% static 'userapp/assets/img/profile-img.jpg' %}
+                            {% endif %}" alt="Profile foto"
+                             class="rounded-circle">
+                        <h2>{{ this_user.get_full_name }}</h2>
+                        <h3>
+                            {% if this_user.is_landlord %}
+                            Арендодатель
+                            {% else %}
+                            Арендатор
+                            {% endif %}
+                        </h3>
+                        <div class="social-links mt-2">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+
+
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Фамилия Имя</div>
+                                    <div class="col-lg-9 col-md-8">{{ this_user.get_full_name }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Город</div>
+                                    <div class="col-lg-9 col-md-8">{{ this_user.city }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">О себе</div>
+                                    <div class="col-lg-9 col-md-8">{{ this_user.about }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Статус</div>
+                                    <div class="col-lg-9 col-md-8">
+                                        {% if this_user.is_landlord %}
+                                        Арендодатель
+                                        {% else %}
+                                        Арендатор
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Телефон</div>
+                                    <div class="col-lg-9 col-md-8"> {{ this_user.user_phone }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Email</div>
+                                    <div class="col-lg-9 col-md-8">{{ this_user.email }}</div>
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

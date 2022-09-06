@@ -1,0 +1,88 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+       <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+
+                            <div class="tab-content pt-2">
+                                <img src="
+                            {% if claim_landlord.user_id.avatar %}
+                            {{ claim_landlord.user_id.avatar.url }}
+                            {% else %}
+                            {% static 'userapp/assets/img/profile-img.jpg' %}
+                            {% endif %}" alt="Profile foto"
+                                 class="rounded-circle">
+
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                    <h5 class="card-title"></h5>
+                                    <p class="small fst-italic"></p>
+                                    {# --- Данные которые отображаются в общей информации --- #}
+
+                                    <h5 class="card-title">Детали профиля</h5>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label ">Фамилия Имя</div>
+                                        <div class="col-lg-9 col-md-8">{{ claim_landlord.user_id.get_full_name }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Компания</div>
+                                        <div class="col-lg-9 col-md-8">{{ claim_landlord.user_id.company }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Должность</div>
+                                        <div class="col-lg-9 col-md-8">{{ claim_landlord.user_id.job_tittle }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Страна</div>
+                                        <div class="col-lg-9 col-md-8">{{ claim_landlord.user_id.country }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Адресс</div>
+                                        <div class="col-lg-9 col-md-8">{{ claim_landlord.user_id.country }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Телефон</div>
+                                        <div class="col-lg-9 col-md-8"> {{ claim_landlord.user_id.user_phone }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Email</div>
+                                        <div class="col-lg-9 col-md-8">{{ claim_landlord.user_id.email }}</div>
+                                    </div>
+                                    <h5 class="card-title">Информация заявителя</h5>
+                                        <div class="col-lg-9 col-md-8">{{ claim_landlord.text }}</div>
+                                </div>
+                            </div>
+
+                        </div><div class="card-body">
+                            <h5>Статус: {% if claim_landlord.is_approved %}
+                                <span class="badge bg-success">Одобрено</span>
+                                {% else %}
+                                <span class="badge bg-danger">Отклонено</span>
+                                {% endif %}
+                            </h5>
+                        </div>
+       </div>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

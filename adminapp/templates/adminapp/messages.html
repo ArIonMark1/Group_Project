@@ -1,0 +1,83 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+      <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Не прочитаные сообщения</h5>
+
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Тема</th>
+                    <th scope="col">Дата</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for message in messages_active %}
+                  <tr>
+                    <td><a class="nav-link collapsed" href="{% url 'admin_staff:message_get' message.pk %}">
+                        {{ message.name }}
+                    </a></td>
+                    <td>{{ message.subject }}</td>
+                    <td>{{ message.created }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Прочитанные сообщения</h5>
+
+              <!-- Dark Table -->
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Тема</th>
+                    <th scope="col">Дата</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for message in messages_not_active %}
+                  <tr>
+                    <td><a class="nav-link collapsed" href="{% url 'admin_staff:message_get' message.pk %}">
+                        {{ message.name }}
+                    </a></td>
+                    <td>{{ message.subject }}</td>
+                    <td>{{ message.created }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Dark Table -->
+
+            </div>
+          </div>
+        </div></div></section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+      <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Контакты</h5>
+
+              <!-- Multi Columns Form -->
+              <form action="" method="post" class="row g-3">
+              {% csrf_token %}
+                <div class="col-md-6">
+                  <label for="inputFirstAddress" class="form-label">Первый адрес</label>
+                    {{ message_form.first_address }}
+<!--                  <input type="text" value="{{ contacts.first_address }}" name="first_address" class="form-control" id="inputFirstAddress">-->
+                </div>
+                <div class="col-md-6">
+                  <label for="inputSecondAddress" class="form-label">Второй адрес</label>
+                    {{ message_form.second_address }}
+<!--                  <input type="text" value="{{ contacts.second_address }}" name="second_address" class="form-control" id="inputSecondAddress">-->
+                </div>
+                  <div class="col-md-6">
+                  <label for="input_first_phone" class="form-label">Первый телефон</label>
+                      {{ message_form.first_phone }}
+<!--                  <input type="text" value="{{ contacts.first_phone }}" name="first_phone" class="form-control" id="input_first_phone">-->
+                </div>
+                <div class="col-md-6">
+                  <label for="input_second_phone" class="form-label">Второй телефон</label>
+                    {{ message_form.second_phone }}
+<!--                  <input type="text" value="{{ contacts.second_phone }}" name="second_phone" class="form-control" id="input_second_phone">-->
+                </div>
+                  <div class="col-md-6">
+                  <label for="first_mail" class="form-label">Первая почта</label>
+                      {{ message_form.first_mail }}
+<!--                  <input type="email" value="{{ contacts.first_mail }}" name="first_mail" class="form-control" id="first_mail">-->
+                </div>
+                <div class="col-md-6">
+                  <label for="second_mail" class="form-label">Вторая почта</label>
+                    {{ message_form.second_mail }}
+<!--                  <input type="email" value="{{ contacts.second_mail }}" name="second_mail" class="form-control" id="second_mail">-->
+                </div>
+                  <div class="col-md-6">
+                  <label for="working_days" class="form-label">Дни работы</label>
+                      {{ message_form.working_days }}
+<!--                  <input type="text" value="{{ contacts.working_days }}" name="working_days" class="form-control" id="working_days">-->
+                </div>
+                <div class="col-md-6">
+                  <label for="Opening_hours" class="form-label">Часы работы</label>
+                    {{ message_form.Opening_hours }}
+<!--                  <input type="text" value="{{ contacts.Opening_hours }}" name="Opening_hours" class="form-control" id="Opening_hours">-->
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Изменить</button>
+                  <button type="reset" class="btn btn-secondary">Отмена</button>
+                </div>
+              </form><!-- End Multi Columns Form -->
+
+            </div>
+          </div>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

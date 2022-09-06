@@ -1,0 +1,20 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

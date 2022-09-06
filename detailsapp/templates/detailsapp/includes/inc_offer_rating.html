@@ -1,0 +1,57 @@
+{% load static %}
+{% if sum_rating %}
+<div class="rating">
+    <div class="rating-header">
+        <h3 class="rating-header-elem">Оценка гостей</h3>
+        <span style="font-size:20px; margin-right: 10px;">{{sum_rating}}</span>
+        <i class="fas fa-star" style="font-size: 25px; color: gold;"></i>
+    </div>
+    <div class="rating-content">
+        {% for rating_name, evaluation in rating_dict.items %}
+        <div class="rating-row">
+            <div class="progress-name">
+                <p>{{rating_name}}</p>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {% widthratio evaluation 1 10 %}%"
+                     aria-valuemin="0" aria-valuemax="10">
+                </div>
+            </div>
+            <div class="progress-rating" style="display: flex;">
+                <p style="font-size: 20px;">{{evaluation}}</p>
+                <i class="fas fa-star" style="font-size: 20px; color: gold;"></i>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+<div class="review">
+    {% for review in reviews %}
+    <div class="message">
+        <div class="user-photo">
+            <img src="{% if user.avatar %}
+                            {{ user.avatar.url }}
+                            {% else %}
+                            {% static 'userapp/assets/img/profile-img.jpg' %}
+                       {% endif %}"
+                 alt="" class="rounded-circle">
+        </div>
+        <div class="message-content">
+            <!--            <h4 class="message-user">{{review.user.first_name}} {{review.user.last_name}}</h4>-->
+            <h4 class="message-user">{{review.user.first_name}}</h4>
+            <p class="message-text">{{review.review_text}}</p>
+            <p class="message-time">{{review.created_at|date:"d.m.Y"}}</p>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="rating">
+    <div class="rating-header">
+        <h3 class="rating-header-elem">Нет отзывов</h3>
+    </div>
+</div>
+{% endif %}

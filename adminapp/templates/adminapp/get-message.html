@@ -1,0 +1,42 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+      <section class="section">
+      <div class="row align-items-top">
+        <div class="col-lg-6">
+            <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Имя: {{ message_active.name }}</h5>
+              <h5 class="card-title">Email: {{ message_active.email }}</h5>
+              <h5 class="card-title">Дата: {{ message_active.created }}</h5>
+            </div>
+          </div>
+            <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Тема: {{ message_active.subject }}</h5>
+              {{ message_active.message }}
+            </div>
+          </div>
+            {% if message_active.is_active %}
+            <a class="nav-link collapsed" href="{% url 'admin_staff:message_delete' message_active.pk %}"><button type="button" class="btn btn-primary">
+            Отметить как прочитанное
+            </button></a>
+            {% endif %}
+        </div></div></section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

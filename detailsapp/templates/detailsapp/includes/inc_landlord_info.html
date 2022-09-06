@@ -1,0 +1,27 @@
+{% load static %}
+<div class="landlord-header">
+    <div class="landlord-photo">
+        <img src="{% if user.avatar %}
+                            {{ user.avatar.url }}
+                            {% else %}
+                            {% static 'userapp/assets/img/profile-img.jpg' %}
+                            {% endif %}"
+             alt="" class="rounded-circle">
+    </div>
+    <div class="landlord-status">
+        <h4 class="landlord-name">{{owner.first_name}}</h4>
+        <div class="status-info">
+            <p class="status-name">{{owner.email}}</p>
+            <p class="status-name">{{owner.username}}</p>
+            <p class="status-date">На сайте с {{owner.created_at|date:"d.m.Y"}}</p>
+        </div>
+    </div>
+    <!--    <div class="time-online">-->
+    <!--        <p>Last time online</p>-->
+    <!--    </div>-->
+
+</div>
+<div class="landlord-content">
+    <p class="landlord-info">{{owner.about}}</p>
+    <!--    <p class="message-time">1 hrs. ago</p>-->
+</div>

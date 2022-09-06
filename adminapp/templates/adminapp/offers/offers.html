@@ -1,0 +1,81 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+        <section class="section dashboard">
+              <div class="row">
+                <!-- Left side columns -->
+                <div class="col-lg-8">
+                    {% for room, room_images in offers_dict.items %}
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                    <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                    <!--                                   <div class="carousel-indicators">-->
+                                    <!--                                        {% for image in room_images %}-->
+                                    <!--                                        <button type="button" data-bs-target="#carouselExampleIndicators"-->
+                                    <!--                                                data-bs-slide-to="{{ forloop.counter0 }}"-->
+                                    <!--                                                class="{% if forloop.counter0 == 0 %}active{% endif %}"-->
+                                    <!--                                                aria-current="true"-->
+                                    <!--                                                aria-label="Slide {{ forloop.counter }}">-->
+                                    <!--                                        </button>-->
+                                    <!--                                        {% endfor %}-->
+                                    <!--                                   </div>-->
+                                    <div class="carousel-inner">
+                                        {% for image in room_images %}
+                                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                            <img src="/media/{{ image.image }}" class="d-block w-100" alt="...">
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                    <!--                                    <button class="carousel-control-prev" type="button"-->
+                                    <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                    <!--                                            data-bs-slide="prev">-->
+                                    <!--                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+                                    <!--                                        <span class="visually-hidden">Назад</span>-->
+                                    <!--                                    </button>-->
+                                    <!--                                    <button class="carousel-control-next" type="button"-->
+                                    <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                    <!--                                            data-bs-slide="next">-->
+                                    <!--                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+                                    <!--                                        <span class="visually-hidden">Вперед</span>-->
+                                    <!--                                    </button>-->
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+
+                                    <a href="{% url 'admin_staff:pre_moderation_details' room.pk %}" target="_blank">
+                                        <h5 class="card-title">{{ room.name }}</h5>
+                                    </a>
+                                    <p class="card-text">Описание: {{ room.description }}</p>
+                                    <p class="card-text">Стоимость: {{ room.payment_per_hour }} руб/час</p>
+                                    <p class="card-text" id="address">Адрес:
+                                        г.{{ room.address.city }}, {{ room.address.street }},
+                                        д. {{ room.address.building }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+        </div>
+              </div></section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

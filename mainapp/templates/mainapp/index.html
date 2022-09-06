@@ -1,0 +1,21 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+<!-- JS includes -->
+{% block js %}
+{% include 'mainapp/includes/inc_js.html' %}
+{% endblock %}
+{% block content %}
+{% include 'mainapp/includes/inc_header.html' %}
+
+{% include 'mainapp/includes/inc_search.html' %}
+
+<!--product section-->
+{% include 'mainapp/includes/inc_slider.html' %}
+
+<!--Team section-->
+{% include 'mainapp/includes/inc_team.html' %}<!-- End off Team section -->
+
+{% include 'mainapp/includes/inc_footer.html' %}
+
+
+{% endblock %}

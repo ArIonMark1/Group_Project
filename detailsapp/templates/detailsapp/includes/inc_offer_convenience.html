@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class="card-body">
+    <h5 class="card-title">Список удобств</h5>
+    <div class="conveniences">
+        {% for convenience_type in convenience_types %}
+        <div class="convenience">
+            <span class="desc-am">{{ convenience_type.name }}</span>
+            <div class="amenities-list">
+                {% for conv in convenience_type.conveniences %}
+                <div style="{% if conv.id in room_conveniences_id %}color: black; font-weight: bolder;{% endif %}">
+                    <svg class="amenities-icon" aria-hidden="true" width="16" height="16" fill="none"
+                         viewBox="0 0 16 16"
+                         xmlns="http://www.w3.org/2000/svg">
+                        {% autoescape off %}
+                        {{ conv.html }}
+                        {% endautoescape %}
+                    </svg>
+                    <span>{{ conv.name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!--    <div class="conveniences">-->
+<!--        {% for convenience_type in convenience_types %}-->
+<!--        <div class="convenience">-->
+<!--            <h5>{{convenience_type.name}}</h5>-->
+<!--            {% for convenience in conveniences %}-->
+<!--            <ul>-->
+<!--                <li><span class="convenience-icon">{{convenience.icon}}</span>{{convenience.name}}</li>-->
+<!--            </ul>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--        {% endfor %}-->
+<!--    </div>-->

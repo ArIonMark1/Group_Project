@@ -1,0 +1,31 @@
+{% load static %}
+
+{#<form class="row g-3 needs-validation" novalidate action="{% url 'authapp:user_update' user.id %}" method="post">#}
+<form action="{% url 'create:user_update' usermodel.id %}" method="post">
+    {% csrf_token %}
+    <div class="col-12">
+        <label for="{{ form.first_name.id_for_label }}" class="form-label">Your
+            Name</label>
+       <p>{{ form.first_name }}</p>
+        <div class="invalid-feedback">Please, enter your name!</div>
+    </div>
+    <div class="col-12">
+        <label for="{{ form.last_name.id_for_label }}" class="form-label">Your
+            Surname</label>
+        {{ form.last_name }}
+        <div class="invalid-feedback">Please, enter your surname!</div>
+    </div>
+    <div class="col-12">
+        <label for="{{ form.user_phone.id_for_label }}" class="form-label">Your
+            Name</label>
+        {{ form.user_phone }}
+        <div class="invalid-feedback">Please, enter your phone!</div>
+    </div>
+    <div class="col-12">
+        <label for="{{ form.country.id_for_label }}" class="form-label">Your
+            Name</label>
+        {{ form.country }}
+        <div class="invalid-feedback">Please, select your country!</div>
+    </div>
+
+</form>

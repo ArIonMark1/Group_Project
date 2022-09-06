@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Verify your account
+From: webmaster@localhost
+To: test3@gmail.com
+Date: Tue, 19 Jul 2022 20:59:20 -0000
+Message-ID: <165826436027.4780.9522608309782092420@LAPTOP-G9SKUG60>
+
+http://127.0.0.1:8888/auth/verify/test3@gmail.com/88678a369b5a1556c97775c3a3af7703b86d7c6b140ee00913663000b9f8669a/
+-------------------------------------------------------------------------------

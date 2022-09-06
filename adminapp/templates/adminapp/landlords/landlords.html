@@ -1,0 +1,53 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+      <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Заявки на получение прав арендодателя</h5>
+
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">почта</th>
+                    <th scope="col">Дата</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for claim in claim_landlords %}
+                  <tr>
+                    <td><a class="nav-link collapsed" href="{% url 'admin_staff:landlord' claim.pk %}">
+                        {{ claim.user_id.first_name }} {{ claim.user_id.last_name }}
+                    </a></td>
+                    <td>{{ claim.user_id.email }}</td>
+                    <td>{{ claim.created_at }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+        </div></div></section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

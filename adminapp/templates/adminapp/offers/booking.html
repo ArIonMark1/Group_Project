@@ -1,0 +1,126 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+      <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <label for="inputStartDate" class="col-sm-2 col-form-label">С (включая):</label>
+                      <input type="date" name="start_date" id="dateIn" class="form-control" placeholder="Дата" required>
+
+                    <label for="inputEndDate" class="col-sm-2 col-form-label">По (не включая):</label>
+
+                      <input type="date" name="end_date" id="dateIn" class="form-control" placeholder="Дата" required>
+                  <button type="submit" class="btn btn-primary">Поиск</button>
+                </form>
+        </div></div></div></div></section>
+      <div class="row">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Открытые бронирования</h5>
+      <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Имя арендатора</th>
+                    <th scope="col">Помещение</th>
+                    <th scope="col">Количество мест</th>
+                    <th scope="col">Дата начала</th>
+                    <th scope="col">Дата конца</th>
+                    <th scope="col">Сумма к оплате</th>
+                    <th scope="col">updated</th>
+                    <th scope="col">created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for booking in user_booking %}
+                  <tr>
+                    <th scope="row">{{ booking.pk }}</th>
+                    <td>
+                        <a class="nav-link collapsed" href="{% url 'admin_staff:user' booking.user.pk %}">
+                            {{ booking.user.get_full_name }}
+                        </a>
+                    </td>
+                      <td><a class="nav-link collapsed" href="{% url 'details:details' booking.offer.pk %}">
+                          {{ booking.offer.name }}
+                      </a></td>
+                    <td>{{ booking.seats }}</td>
+                    <td>{{ booking.start_date }}</td>
+                    <td>{{ booking.end_date }}</td>
+                    <td>{{ booking.amount }}</td>
+                    <td>{{ booking.updated_at }}</td>
+                      <td>{{ booking.created_at }}</td>
+                  </tr>
+
+                {% endfor %}
+                </tbody>
+              </table>
+                   <!-- End Default Table Example -->
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Закрытые бронирования</h5>
+
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Имя арендатора</th>
+                    <th scope="col">Помещение</th>
+                    <th scope="col">Количество мест</th>
+                    <th scope="col">Дата начала</th>
+                    <th scope="col">Дата конца</th>
+                    <th scope="col">Сумма к оплате</th>
+                    <th scope="col">updated</th>
+                    <th scope="col">created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for booking in user_booking_completed %}
+                  <tr>
+                    <th scope="row">{{ booking.pk }}</th>
+                    <td>
+                        <a class="nav-link collapsed" href="{% url 'admin_staff:user' booking.user.pk %}">
+                            {{ booking.user.get_full_name }}
+                        </a>
+                    </td>
+                      <td><a class="nav-link collapsed" href="{% url 'details:details' booking.offer.pk %}">
+                          {{ booking.offer.name }}
+                      </a></td>
+                    <td>{{ booking.seats }}</td>
+                    <td>{{ booking.start_date }}</td>
+                    <td>{{ booking.end_date }}</td>
+                    <td>{{ booking.amount }}</td>
+                    <td>{{ booking.updated_at }}</td>
+                      <td>{{ booking.created_at }}</td>
+                  </tr>
+
+                {% endfor %}
+                </tbody>
+              </table>
+            </div></div></div></div>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

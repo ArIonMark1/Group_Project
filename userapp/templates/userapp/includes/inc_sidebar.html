@@ -1,0 +1,57 @@
+ {% load static %}
+
+ <!-- Левое меню -->
+
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'user:profile' %}">
+          <i class="bi bi-person"></i>
+          <span>Профиль</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'user:bookings' %}">
+          <i class="bi bi-cart"></i>
+          <span>Мои бронирования</span>
+        </a>
+      </li>
+
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'user:favorites' %}">
+          <i class="bi bi-bookmark-heart-fill"></i>
+          <span>Избранное</span>
+        </a>
+      </li>
+      {% if not user.is_landlord %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'user:landlord-application' %}">
+          <i class="bi bi-box"></i>
+          <span>Стать арендодателем</span>
+        </a>
+      </li>
+      {% endif %}
+      {% if user.is_landlord %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'user:locations' %}">
+          <i class="bi bi-box"></i>
+          <span>Мои локации</span>
+
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'user:booking_history' %}">
+          <i class="ri-history-fill"></i>
+          <span>История бронирований</span>
+
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+
+  </aside><!-- End Sidebar-->

@@ -1,0 +1,186 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ======= Header ======= -->
+{% include 'userapp/includes/inc_header.html' %}
+
+<!-- ======= Sidebar ======= -->
+{% include 'userapp/includes/inc_sidebar.html' %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Мои бронирования</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'user:main' %}">Общая информация</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'user:profile' %}">Профиль</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'user:favorites' %}">Избранное</a></li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="card-body pt-3">
+            <ul class="nav nav-tabs nav-tabs-bordered">
+                <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="tab"
+                            data-bs-target="#current-rentals">Текущие заказы
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link " data-bs-toggle="tab"
+                            data-bs-target="#completed-rentals">Закрытые заказы
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content pt-2" id="borderedTabContent">
+                <div class="tab-pane fade show active" id="current-rentals">
+                    <div class="col-lg-9">
+                        {% for rental, rental_images in current_rentals_dict.items %}
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                        <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                        <!--                                   <div class="carousel-indicators">-->
+                                        <!--                                        {% for image in rental_images %}-->
+                                        <!--                                        <button type="button" data-bs-target="#carouselExampleIndicators"-->
+                                        <!--                                                data-bs-slide-to="{{ forloop.counter0 }}"-->
+                                        <!--                                                class="{% if forloop.counter0 == 0 %}active{% endif %}"-->
+                                        <!--                                                aria-current="true"-->
+                                        <!--                                                aria-label="Slide {{ forloop.counter }}">-->
+                                        <!--                                        </button>-->
+                                        <!--                                        {% endfor %}-->
+                                        <!--                                   </div>-->
+                                        <div class="carousel-inner">
+                                            {% for image in rental_images %}
+                                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                                <img src="/media/{{ image.image }}" class="d-block w-100" alt="...">
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                        <!--                                    <button class="carousel-control-prev" type="button"-->
+                                        <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                        <!--                                            data-bs-slide="prev">-->
+                                        <!--                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+                                        <!--                                        <span class="visually-hidden">Назад</span>-->
+                                        <!--                                    </button>-->
+                                        <!--                                    <button class="carousel-control-next" type="button"-->
+                                        <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                        <!--                                            data-bs-slide="next">-->
+                                        <!--                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+                                        <!--                                        <span class="visually-hidden">Вперед</span>-->
+                                        <!--                                    </button>-->
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+
+                                        <a href="{% url 'details:details' rental.offer.pk %}">
+                                            <h5 class="card-title">{{ rental.offer.name }}</h5>
+                                        </a>
+                                        <p class="card-text" id="address">Адрес:
+                                            г.{{ rental.offer.address.city }}, {{ rental.offer.address.street }},
+                                            д. {{ rental.offer.address.building }}</p>
+                                        <p class="card-text" id="seats">Запрошенные места: {{ rental.seats }} шт.</p>
+                                        <p class="card-text" id="payment">Стоимость: {{ rental.offer.payment_per_hour }}
+                                            руб/ч</p>
+                                        <p class="card-text hidden" id="amount">Сумма к оплате: {{ rental.amount }}</p>
+                                        <p class="card-text hidden" id="rental-dates">Срок аренды: с
+                                            {{rental.start_date|date:"d.m.Y H:i"}}
+                                            до {{rental.end_date|date:"d.m.Y H:i"}} </p>
+                                    </div>
+                                </div>
+                                <a class="nav-link collapsed" href="{% url 'details:send_review' rental.pk %}">
+                                    <button type="button" class="btn btn-success">Закрыть заказ и оставить отзыв</button>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="completed-rentals">
+                    <div class="col-lg-9">
+                        {% for rental, rental_images in completed_rentals_dict.items %}
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                        <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                        <!--                                   <div class="carousel-indicators">-->
+                                        <!--                                        {% for image in rental_images %}-->
+                                        <!--                                        <button type="button" data-bs-target="#carouselExampleIndicators"-->
+                                        <!--                                                data-bs-slide-to="{{ forloop.counter0 }}"-->
+                                        <!--                                                class="{% if forloop.counter0 == 0 %}active{% endif %}"-->
+                                        <!--                                                aria-current="true"-->
+                                        <!--                                                aria-label="Slide {{ forloop.counter }}">-->
+                                        <!--                                        </button>-->
+                                        <!--                                        {% endfor %}-->
+                                        <!--                                   </div>-->
+                                        <div class="carousel-inner">
+                                            {% for image in rental_images %}
+                                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                                <img src="/media/{{ image.image }}" class="d-block w-100" alt="...">
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                        <!--                                    <button class="carousel-control-prev" type="button"-->
+                                        <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                        <!--                                            data-bs-slide="prev">-->
+                                        <!--                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+                                        <!--                                        <span class="visually-hidden">Назад</span>-->
+                                        <!--                                    </button>-->
+                                        <!--                                    <button class="carousel-control-next" type="button"-->
+                                        <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                        <!--                                            data-bs-slide="next">-->
+                                        <!--                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+                                        <!--                                        <span class="visually-hidden">Вперед</span>-->
+                                        <!--                                    </button>-->
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+
+                                        <a href="{% url 'details:details' rental.offer.pk %}" target="_blank">
+                                            <h5 class="card-title">{{ rental.offer.name }}</h5>
+                                        </a>
+                                        <p class="card-text" id="address">Адрес:
+                                            г.{{ rental.offer.address.city }}, {{ rental.offer.address.street }},
+                                            д. {{ rental.offer.address.building }}</p>
+                                        <p class="card-text" id="seats">Запрошенные места: {{ rental.seats }} шт.</p>
+                                        <p class="card-text" id="payment">Стоимость: {{ rental.offer.payment_per_hour }}
+                                            руб/ч</p>
+                                        <p class="card-text hidden" id="amount">Сумма к оплате: {{ rental.amount }}</p>
+                                        <p class="card-text hidden" id="rental-dates">Срок аренды: с
+                                            {{rental.start_date|date:"d.m.Y H:i"}}
+                                            до {{rental.end_date|date:"d.m.Y H:i"}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+</main>
+
+<!-- ======= Footer ======= -->
+{% include 'userapp/includes/inc_footer.html' %}
+{% endblock %}
+{% block js %}
+
+{% include 'userapp/includes/inc_js.html' %}
+{% endblock %}
+

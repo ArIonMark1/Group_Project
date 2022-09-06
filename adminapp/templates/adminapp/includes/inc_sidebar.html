@@ -1,0 +1,91 @@
+ {% load static %}
+
+ <!-- Левое меню -->
+
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-heading">Пользователи</li>
+    {% if user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:users' %}">
+          <i class="bi bi-person-circle"></i>
+          <span>Пользователи</span>
+        </a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:landlords' %}">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Заявки(права арендодателя)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:landlords_history' %}">
+          <i class="bi bi-clock-fill"></i>
+          <span>Истории заявок(права арендодателя)</span>
+        </a>
+      </li>
+      <li class="nav-heading">Отзывы</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:criterion' %}">
+          <i class="bi bi-list-stars"></i>
+          <span>Критерии оценки</span>
+        </a>
+      </li>
+      <li class="nav-heading">Объявления</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:booking' %}">
+          <i class="ri-history-fill"></i>
+          <span>История бронирований</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:room_category' %}">
+          <i class="bi bi-card-list"></i>
+          <span>Категории объявлений</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:convenience_type' %}">
+          <i class="bi bi-grid-3x2-gap-fill"></i>
+          <span>Удобства</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:offers' %}">
+          <i class="bi bi-file-earmark-text"></i>
+          <span>Активные объявления</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:pre_moderation' %}">
+          <i class="bi bi-file-earmark-plus-fill"></i>
+          <span>Премодерация</span>
+        </a>
+      </li>
+      <li class="nav-heading">feedback</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:contact' %}">
+          <i class="bi bi-person"></i>
+          <span>Контакты</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:question_category' %}">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q.</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'admin_staff:message' %}">
+          <i class="bi bi-chat-text-fill"></i>
+          <span>Сообщения от пользователей</span>
+
+        </a>
+      </li>
+
+    </ul>
+
+  </aside><!-- End Sidebar-->

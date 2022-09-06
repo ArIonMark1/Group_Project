@@ -1,0 +1,158 @@
+{% extends 'offersapp/base.html' %}
+{% load cache %}
+{% load static %}
+{% block content %}
+
+<!-- ======= Header ======= -->
+{% include 'offersapp/includes/inc_header.html' %}
+
+<!-- ======= Sidebar ======= -->
+{% include 'offersapp/includes/inc_sidebar.html' %}
+<!-- End Sidebar-->
+
+<main id="main" class="main">
+
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-8">
+                <div class="row">
+                    <!-- Action Card -->
+                    <div class="col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ actions.name }}<span></span></h5>
+                                <div class="d-flex align-items-center">
+                                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                      <i class="bi bi-wallet-fill"></i>
+                                    </div> -->
+                                    <div class="ps-3">
+                                        <h6>{{ actions.text }}</h6>
+                                        <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Action Card -->
+
+                    <!-- Another info Card #1 -->
+                    <div class="col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Ещё акция </h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="ps-3">
+                                        <h6>Ну что-то мы ещё предложим. Честно-честно =)</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card with an image on left -->
+                    {% for room, room_images in offers_dict.items %}
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                    <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                    <!--                                   <div class="carousel-indicators">-->
+                                    <!--                                        {% for image in room_images %}-->
+                                    <!--                                        <button type="button" data-bs-target="#carouselExampleIndicators"-->
+                                    <!--                                                data-bs-slide-to="{{ forloop.counter0 }}"-->
+                                    <!--                                                class="{% if forloop.counter0 == 0 %}active{% endif %}"-->
+                                    <!--                                                aria-current="true"-->
+                                    <!--                                                aria-label="Slide {{ forloop.counter }}">-->
+                                    <!--                                        </button>-->
+                                    <!--                                        {% endfor %}-->
+                                    <!--                                   </div>-->
+                                    <div class="carousel-inner">
+                                        {% for image in room_images %}
+                                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                            <img src="/media/{{ image.image }}" class="d-block w-100" alt="...">
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                    <!--                                    <button class="carousel-control-prev" type="button"-->
+                                    <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                    <!--                                            data-bs-slide="prev">-->
+                                    <!--                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+                                    <!--                                        <span class="visually-hidden">Назад</span>-->
+                                    <!--                                    </button>-->
+                                    <!--                                    <button class="carousel-control-next" type="button"-->
+                                    <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                    <!--                                            data-bs-slide="next">-->
+                                    <!--                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+                                    <!--                                        <span class="visually-hidden">Вперед</span>-->
+                                    <!--                                    </button>-->
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+
+                                    <a href="{% url 'details:details' room.pk %}">
+                                        <h5 class="card-title">{{ room.name }}</h5>
+                                    </a>
+                                    <p class="card-text">Описание: {{ room.description }}</p>
+                                    <p class="card-text">Стоимость: {{ room.payment_per_hour }} руб/час</p>
+                                    <p class="card-text" id="address">Адрес:
+                                        г.{{ room.address.city }}, {{ room.address.street }},
+                                        д. {{ room.address.building }}</p>
+                                    <p class="card-text hidden" id="lattitude">широта: {{ room.address.latitude }}</p>
+                                    <p class="card-text hidden" id="longitude">долгота: {{ room.address.longitude }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- End Left side columns -->
+
+            <!-- Right side columns -->
+            <div class="col-lg-4">
+                <!-- News & Updates Traffic -->
+                {% cache 3600 news_div %}
+                <div class="card" id="news_div">
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Новости</h5>
+
+                        <div class="news">
+                            {% for news in news_list %}
+                            <div class="post-item clearfix">
+                                <img src="{{ news.image }}" alt="">
+                                <h4><a href="{{ news.link }}">{{ news.name }}</a></h4>
+                                <p>{{ news.text }}</p>
+                            </div>
+                            {% endfor %}
+
+                        </div><!-- End sidebar recent posts-->
+                    </div>
+                </div>
+                {% endcache %}<!-- End News & Updates -->
+
+                <!--                &lt;!&ndash; maps &ndash;&gt;-->
+                <!--                <div class="card" id="map">-->
+                <!--                </div>-->
+                <!--                &lt;!&ndash; End maps &ndash;&gt;-->
+            </div>
+            <!-- End Right side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+{% include 'offersapp/includes/inc_footer.html' %}
+{% endblock %}
+
+
+<!-- Vendor JS Files -->
+{% block js %}
+{% include 'offersapp/includes/inc_js.html' %}
+{% endblock %}

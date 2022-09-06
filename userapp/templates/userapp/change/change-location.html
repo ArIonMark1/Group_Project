@@ -1,0 +1,176 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'mainapp/includes/inc_header.html' %}
+<link href="{% static 'mainapp/assets/css/create_ad_style.css' %}" rel="stylesheet">
+
+<section id="home" class="home bg-black fix" xmlns="http://www.w3.org/1999/html">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-sm-8" style="background-color: white; border: 3px solid #808080; border-radius: 25px;
+                                        margin-bottom: 70px">
+
+                {% if form.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                     style="margin-top: 50px;">
+                    {{ form.errors }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                {% endif %}
+
+                <div class="card shadow-lg border-0 rounded-lg mt-5"
+                     style="padding-left:30px; padding-right: 30px;">
+                    <div class="card-header" style="padding-top: 40px; padding-bottom: 30px;"><h2
+                            class="text-center font-weight-light my-4">
+                        Редактирование объявления</h2>
+                    </div>
+                    <div class="card-body">
+
+                        <form action="" method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="small mb-20" for="{{ form.name.id_for_label }}">Название
+                                    помещения</label>
+                                {{ form.name }}
+                            </div>
+
+                            <div class="form-group">
+                                <label class="small mb-20 f-label" for="{{ form.square.id_for_label }}">Площадь
+                                    помещения</label>
+                                {{ form.square }}
+                            </div>
+
+                            <div class="form-group">
+                                <label class="small mb-20"
+                                       for="{{ form.description.id_for_label }}">Описание</label>
+                                {{ form.description }}
+                            </div>
+
+                            <div class="form-group">
+                                <label class="small mb-20 f-label"
+                                       for="{{ form.payment_per_hour.id_for_label }}">Цена
+                                    в час</label>
+                                {{ form.payment_per_hour }}
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-20 form-input f-label"
+                                       for="{{ form.category.id_for_label }}">Категория</label>
+                                {{ form.category }}
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-20 f-label"
+                                       for="{{ form.seats_number.id_for_label }}">Количество рабочих
+                                    мест</label>
+                                {{ form.seats_number }}
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-20 f-label"
+                                       for="{{ form.minimum_booking_time.id_for_label }}">Минимальное время
+                                    аренды</label>
+                                {{ form.minimum_booking_time }}
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-20 f-label"
+                                       for="{{ form.start_working_hours.id_for_label }}">Время работы
+                                    с </label>
+                                {{ form.start_working_hours }}
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-20 f-label"
+                                       for="{{ form.end_working_hours.id_for_label }}">Время работы
+                                    до </label>
+                                {{ form.end_working_hours }}
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-20 f-label"
+                                       for="{{ form.phone_number.id_for_label }}">Номер телефона</label>
+                                {{ form.phone_number }}
+                            </div>
+                            <div class="form-group file-input-container">
+                                <label for="{{ form.image.id_for_label }}">Фото</label>
+                                {{ form.image }}
+                                <div id="uploaded-files"></div>
+                                <script>
+                                    const uploadedFiles = $('#uploaded-files');
+                                    uploadedFiles.empty();
+                                    const fileList = {{ this_image|safe }}
+                                    for(let i=0; i < fileList.length; i++) {
+                                        var fileName1 = fileList[i].split('/')[1]
+
+
+                                        const img = $(`<img class="preview-img" src="/media/${fileList[i]}"></img>`);
+
+                                        const container = $('<div class="preview-img-container"/>');
+                                        const description = $('<span/>');
+                                        description.text(`${fileName1}`);
+                                        container.append(img);
+                                        container.append(description);
+
+                                        uploadedFiles.append(container);
+                                    }
+                                </script>
+                            </div>
+
+                            <div style="width: 100%; padding-bottom: 15px">
+                                <label for="{{ form.address.id_for_label }}">Адрес</label>
+                                {{ form.address }}
+                                <p id="address-notice" class="error-msg" style="display: none;">Адрес не
+                                    найден</p>
+                            </div>
+
+                            <div id="map" class="map"></div>
+                            {% include 'mainapp/includes/inc_yandex_map.html' %}
+                            <script src="{% static 'mainapp/assets/js/create_ad_script.js' %}"></script>
+                            <script>
+                                var adrElm = document.querySelector('#address');
+                                var adr = adrElm.value;
+                                function adAddress() {
+                                        $('#address').val(adr);
+                                };
+                                setTimeout(adAddress, 2000);
+                            </script>
+
+
+                            <div id="amenities">
+                                {% include 'createapp/includes/inc_amenities.html' %}
+                            </div>
+
+                            {{ form.selected_amenities }}
+
+                            <button class="btn btn-primary"
+                                    style="margin-top:30px; margin-bottom:30px;"
+                                    type="submit">Обновить
+                            </button>
+                        </form>
+                    </div><!-- End off slid item -->
+
+                </div>
+            </div>
+            <!--End off row-->
+        </div>
+        <!--End off container -->
+</section>
+<script>
+    var arr = {{ this_conv|safe }};
+    var elm = document.querySelectorAll('.amenity-clickable');
+    elm.forEach(function(item, i, elm) {
+    if (arr.includes(Number(item.getAttribute('convid')))) {
+        item.click();
+    };
+});
+</script>
+<!--product section-->
+<!--Team section-->
+{% include 'mainapp/includes/inc_footer.html' %}
+
+{% endblock %}
+<!-- JS includes -->
+{% block js %}
+
+{% include 'mainapp/includes/inc_js.html' %}
+{% endblock %}

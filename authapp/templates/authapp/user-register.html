@@ -1,0 +1,134 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block content %}
+
+    <main>
+        <div class="container">
+
+            <section
+                    class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="card mb-3">
+
+                                <div class="card-body">
+
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Создайте аккаунт пользователя</h5>
+                                        <p class="text-center small">Укажите данные для создания аккаунта</p>
+                                    </div>
+                                    {# #################################################################### #}
+                                    {% if form.errors or form.non_field_errors %}
+                                        <div class="alert alert-warning fade show" role="alert">
+                                            <strong>{{ form.errors|escape }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {# ================================================================== #}
+                                    {#                                    {% if messages or form.non_field_errors %}#}
+                                    {#                                        <div class="alert {% if messages %} alert-success {% else %} alert-warning#}
+                                    {#                                                {% endif %}   alert-dismissible fade show" role="alert"#}
+                                    {#                                             style="margin-top: 50px;">#}
+                                    {#                                            {% if messages %}#}
+                                    {#                                                {% for message in messages %}#}
+                                    {#                                                    {{ message }}#}
+                                    {#                                                {% endfor %}#}
+                                    {##}
+                                    {#                                            {% endif %}#}
+                                    {##}
+                                    {#                                            {% for error in form.non_field_errors %}#}
+                                    {#                                                <p>{{ error }}</p>#}
+                                    {#                                            {% endfor %}#}
+                                    {#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+                                    {#                                                <span aria-hidden="true">&times;</span>#}
+                                    {#                                            </button>#}
+                                    {#                                        </div>#}
+                                    {##}
+                                    {#                                    {% endif %}#}
+
+                                    {# ================================================================== #}
+                                    {# #################################################################### #}
+
+                                    <form class="row g-3 needs-validation" novalidate action="{% url 'auth:user' %}"
+                                          method="post">
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                            <label for="{{ form.first_name.id_for_label }}" class="form-label">Имя</label>
+                                            {{ form.first_name }}
+                                            <div class="invalid-feedback">Введите ваше имя.</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="{{ form.city.id_for_label }}" class="form-label">Город</label>
+                                            {{ form.city }}
+                                            <div class="invalid-feedback">Введите ваш город.</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="{{ form.email.id_for_label }}" class="form-label">Ваш Email</label>
+                                            {{ form.email }}
+                                            <div class="invalid-feedback">Введите ваш Email.</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="{{ form.username.id_for_label }}"
+                                                   class="form-label">Логин</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                                {{ form.username }}
+
+                                                <div class="invalid-feedback">Введите ваш логин.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="{{ form.password1.id_for_label }}"
+                                                   class="form-label">Пароль</label>
+                                            {{ form.password1 }}
+
+                                            <div class="invalid-feedback">Введите ваш пароль.</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="{{ form.password2.id_for_label }}"
+                                                   class="form-label">Пароль</label>
+                                            {{ form.password2 }}
+
+                                            <div class="invalid-feedback">Введите ваш пароль.</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="terms" type="checkbox" value=""
+                                                       id="acceptTerms" required>
+                                                <label class="form-check-label" for="acceptTerms">Я подтверждаю и соглашаюсь с
+                                                    <a
+                                                            href="#">Условиями пользования</a></label>
+                                                <div class="invalid-feedback">Вы должны подтвердить, прежде чем продолжить!</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Зарегистрироваться</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="small mb-0">Уже есть аккаунт? <a
+                                                    href="{% url 'auth:login' %}">Войдите!</a></p>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+{% endblock %}
+{% block js %}
+
+    {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

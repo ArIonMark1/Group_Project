@@ -1,0 +1,75 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'adminapp/includes/inc_sidebar.html' %}
+
+  <main id="main" class="main">
+      <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Изменить</th>
+                    <th scope="col">Удалить</th>
+                    <th scope="col">updated</th>
+                    <th scope="col">created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for criterion in criterions %}
+                  <tr>
+                    <th scope="row">{{ criterion.pk }}</th>
+                    <td>{{ criterion.name }}</td>
+                      <td><a class="nav-link collapsed" href="{% url 'admin_staff:criterion_edit' criterion.pk %}">
+                          <i class="ri-edit-fill"></i>
+                      </a></td>
+                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered{{ criterion.pk }}">
+                          <i class="bi-x-circle"></i>
+                    </button></td>
+                    <td>{{ criterion.updated_at }}</td>
+                      <td>{{ criterion.created_at }}</td>
+                  </tr>
+
+              <div class="modal fade" id="verticalycentered{{ criterion.pk }}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"><span class="badge bg-danger">ВНИМАНИЕ</span></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Вы уверены что хотите удалить критерий "{{ criterion.name }}"?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <a class="nav-link collapsed" href="{% url 'admin_staff:criterion_delete' criterion.pk %}">
+                      <button type="button" class="btn btn-primary">Удалить</button>
+                        </a>
+                    </div>
+
+                </div>
+              </div><!-- End Vertically centered Modal-->
+
+            </div>
+
+                {% endfor %}
+                </tbody>
+              </table>
+
+      <a class="nav-link collapsed" href="{% url 'admin_staff:criterion_add' %}"><button type="button" class="btn btn-dark">
+                          Добавить критерий
+                      </button></a>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

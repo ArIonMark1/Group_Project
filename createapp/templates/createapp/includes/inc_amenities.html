@@ -1,0 +1,24 @@
+{% load static %}
+
+<h4>Удобства в коворкинге</h4>
+<div class="amenities-box">
+    {% for type in conv_types %}
+    <div class="amenities-block">
+        <span class="desc-am">{{ type.name }}</span>
+        <div class="amenities-list">
+             {% for conv in type.conveniences %}
+            <div onclick="onAmenitySelected(event)" class="amenity-clickable" convid="{{ conv.id }}">
+                <svg class="amenities-icon" aria-hidden="true" width="16" height="16" fill="none" viewBox="0 0 16 16"
+                     xmlns="http://www.w3.org/2000/svg">
+                    {% autoescape off %}
+                    {{ conv.html }}
+                    {% endautoescape %}
+                </svg>
+                <span>{{ conv.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+

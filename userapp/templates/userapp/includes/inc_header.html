@@ -1,0 +1,247 @@
+{% load static %}
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="{% url 'main' %}" class="logo d-flex align-items-center">
+            <img src="{% static 'userapp/assets/img/logo.png' %}" alt="">
+            <span class="d-none d-lg-block">ЛОКАЦИЯ</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <!--  <div class="search-bar">
+       <form class="search-form d-flex align-items-center" method="POST" action="#">
+         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+       </form>
+     </div> --><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+<!--            <li class="nav-item dropdown">-->
+
+<!--                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">-->
+<!--                    <i class="bi bi-bell"></i>-->
+<!--                    <span class="badge bg-primary badge-number">4</span>-->
+<!--                </a>&lt;!&ndash; End Notification Icon &ndash;&gt;-->
+
+<!--                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">-->
+<!--                    <li class="dropdown-header">-->
+<!--                        У вас 4 новых уведомления-->
+<!--                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Посмотреть все</span></a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="notification-item">-->
+<!--                        <i class="bi bi-exclamation-circle text-warning"></i>-->
+<!--                        <div>-->
+<!--                            <h4>Lorem Ipsum</h4>-->
+<!--                            <p>Quae dolorem earum veritatis oditseno</p>-->
+<!--                            <p>30 min. ago</p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="notification-item">-->
+<!--                        <i class="bi bi-x-circle text-danger"></i>-->
+<!--                        <div>-->
+<!--                            <h4>Atque rerum nesciunt</h4>-->
+<!--                            <p>Quae dolorem earum veritatis oditseno</p>-->
+<!--                            <p>1 hr. ago</p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="notification-item">-->
+<!--                        <i class="bi bi-check-circle text-success"></i>-->
+<!--                        <div>-->
+<!--                            <h4>Sit rerum fuga</h4>-->
+<!--                            <p>Quae dolorem earum veritatis oditseno</p>-->
+<!--                            <p>2 hrs. ago</p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="notification-item">-->
+<!--                        <i class="bi bi-info-circle text-primary"></i>-->
+<!--                        <div>-->
+<!--                            <h4>Dicta reprehenderit</h4>-->
+<!--                            <p>Quae dolorem earum veritatis oditseno</p>-->
+<!--                            <p>4 hrs. ago</p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+<!--                    <li class="dropdown-footer">-->
+<!--                        <a href="#">Показать все уведомления</a>-->
+<!--                    </li>-->
+
+<!--                </ul>&lt;!&ndash; End Notification Dropdown Items &ndash;&gt;-->
+
+<!--            </li>&lt;!&ndash; End Notification Nav &ndash;&gt;-->
+
+<!--            <li class="nav-item dropdown">-->
+
+<!--                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">-->
+<!--                    <i class="bi bi-chat-left-text"></i>-->
+<!--                    <span class="badge bg-success badge-number">3</span>-->
+<!--                </a>&lt;!&ndash; End Messages Icon &ndash;&gt;-->
+
+<!--                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">-->
+<!--                    <li class="dropdown-header">-->
+<!--                        У вас 3 новых сообщения-->
+<!--                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Посмотреть все</span></a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="message-item">-->
+<!--                        <a href="#">-->
+<!--                            <img src="{% static 'userapp/assets/img/messages-1.jpg' %}" alt="" class="rounded-circle">-->
+<!--                            <div>-->
+<!--                                <h4>Maria Hudson</h4>-->
+<!--                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>-->
+<!--                                <p>4 hrs. ago</p>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="message-item">-->
+<!--                        <a href="#">-->
+<!--                            <img src="{% static 'userapp/assets/img/messages-2.jpg' %}" alt="" class="rounded-circle">-->
+<!--                            <div>-->
+<!--                                <h4>Anna Nelson</h4>-->
+<!--                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>-->
+<!--                                <p>6 hrs. ago</p>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="message-item">-->
+<!--                        <a href="#">-->
+<!--                            <img src="{% static 'userapp/assets/img/messages-3.jpg' %}" alt="" class="rounded-circle">-->
+<!--                            <div>-->
+<!--                                <h4>David Muldon</h4>-->
+<!--                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>-->
+<!--                                <p>8 hrs. ago</p>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <hr class="dropdown-divider">-->
+<!--                    </li>-->
+
+<!--                    <li class="dropdown-footer">-->
+<!--                        <a href="#">Показать все сообщения</a>-->
+<!--                    </li>-->
+
+<!--                </ul>&lt;!&ndash; End Messages Dropdown Items &ndash;&gt;-->
+
+<!--            </li>&lt;!&ndash; End Messages Nav &ndash;&gt;-->
+
+            <!-- Кнопка ДОМОЙ
+
+            <a href="{% url 'main' %}" title="To Home Page"</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="28" fill="currentColor" class="bi bi-house"
+                 viewBox="0 0 16 16">
+
+                <path fill-rule="evenodd"
+                      d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                <path fill-rule="evenodd"
+                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+            </svg>
+
+             Кнопка ДОМОЙ -->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="
+            {% if user.avatar %}
+            {{ user.avatar.url }}
+            {% else %}
+            {% static 'userapp/assets/img/profile-img.jpg' %}
+            {% endif %}" alt="Profile_foto" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ user.get_full_name }}</span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>{{ user.get_full_name }}</h6>
+                        <span>CEO</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'user:main' %}">
+                            <i class="bi bi-person"></i>
+                            <span>Мой профиль</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'user:profile' %}">
+                            <i class="bi bi-gear"></i>
+                            <span>Настройки аккаунта</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'feedback:main' %}">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Нужна помощь?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'auth:logout' %}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Выход</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->

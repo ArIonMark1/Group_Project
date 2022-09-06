@@ -1,0 +1,25 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block css %}
+{% include 'detailsapp/includes/inc_css.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'detailsapp/includes/inc_header.html' %}
+<div class="offer-content">
+    <div class="offer">
+        {% include 'detailsapp/includes/inc_offer_content.html' %}
+    </div>
+    {% if show %}
+    {% include 'detailsapp/includes/inc_offer_form.html' %}
+    {% endif %}
+</div>
+
+{% include 'detailsapp/includes/inc_footer.html' %}
+{% endblock %}
+
+{% block js %}
+{% include 'detailsapp/includes/inc_js.html' %}
+{% include 'mainapp/includes/inc_js.html' %}
+{% endblock %}

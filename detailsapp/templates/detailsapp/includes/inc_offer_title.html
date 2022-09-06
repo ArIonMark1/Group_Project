@@ -1,0 +1,26 @@
+{% load static %}
+<h4 class="offer-name">{{offer.name}}</h4>
+<div class="offer-short-links">
+    <div class="short-links-content">
+        <p>{{category.name}}</p>
+        <p>{{offer_address.street}}</p>
+        <p class="desc-header-p">Телефон: {{offer.phone_number}}</p>
+<!--        <a href="#view_map">Показать на карте</a>-->
+    </div>
+    {% if show and user.is_authenticated %}
+    <div class="short-links-func">
+        {% if in_fav %}
+        <a class="favorite" href="{% url 'details:del_favorite' offer.pk %}">
+            <div class="heart"></div>
+            <p>Убрать из избранного</p>
+        </a>
+        {% else %}
+        <a class="favorite" href="{% url 'details:add_favorite' offer.pk %}">
+            <div class="heart" style="opacity: 0.25;"></div>
+            <p>В избранное</p>
+        </a>
+        {% endif%}
+    </div>
+    {% endif %}
+
+</div>

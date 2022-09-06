@@ -1,0 +1,16 @@
+{% load static %}
+
+<label for="select_seats">Доступно мест:</label>
+<select class="form-select period-select" aria-label="Default select example" id="select_seats" name="seats">
+    {% if seats %}
+    <option disabled selected value> Выберите период </option>
+    {% for dates, available_seats in seats.items %}
+    <option value="{{available_seats}}">{{available_seats}} мест {{dates}}</option>
+    {% endfor %}
+    {% else %}
+    <option disabled selected value> Выберите кол-во мест для бронирования </option>
+    {% for seat in available_seats %}
+    <option value="{{seat}}">{{seat}}</option>
+    {% endfor %}
+    {% endif %}
+</select>

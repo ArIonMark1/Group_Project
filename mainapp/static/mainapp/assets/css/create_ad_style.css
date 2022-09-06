@@ -1,0 +1,142 @@
+/* DO NOT REMOVE ANY STYLES FROM THIS FILE, THEY USED IN PLACE AD FORM!!! */
+
+small {
+    font-size: 99%;
+}
+
+.btn-file {
+    color: #fff;
+    background-color: #3f92d1;
+}
+
+.error-msg {
+    color: rgb(255,128,128);
+    font-weight: bold;
+}
+
+.input_error {
+    border:1px solid #ff0000;
+}
+
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+.alert-dismissible {
+    padding-right: 4rem;
+}
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 30px;
+}
+
+.form-input {
+    border-width: 1px;
+    border-radius: 0.5rem;
+    border-color: #6495ED;
+}
+.f-label {
+    padding-right: 22px;
+    flex-shrink: 0;
+    padding-top: 6px;
+    width: 280px;
+    font-size: 14px;
+    line-height: 16px;
+}
+.amenities-box {
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-content: space-between;
+    align-content: space-between;
+    margin-top: 24px;
+}
+
+.amenities-block {
+    -moz-box-flex: 1;
+    -webkit-flex: 1 1 210px;
+    flex: 1 1 210px;
+    margin-right: 15px;
+    padding: 0px 15px 15px 15px;
+}
+.amenities-list {
+    padding-top: 12px;
+}
+
+.amenity-clickable {
+    cursor: pointer;
+}
+
+.amenities-icon {
+    width: 16;
+    height: 16;
+    fill: none;
+    color: #737a8e;
+    margin-right: 8px;
+
+}
+.desc-am {
+    font-family: serif;
+    font-size: 20px;
+}
+
+.file-input {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input-container {
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.file-input-container label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: #3f92d1;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+  margin-bottom: 25px;
+}
+
+.file-input-container:hover + label,
+.file-input-container:focus +  label {
+  transform: scale(1.15);
+}
+
+.file-input-container:focus +  label {
+  outline: 1px solid #000;
+  outline: -webkit-focus-ring-color auto 2px;
+}
+
+.preview-img {
+    max-width: 150px;
+    max-height: 150px;
+    padding-top: 15px;
+    padding-right: 15px;
+}
+
+.preview-img-container {
+    padding-top: 15px;
+}

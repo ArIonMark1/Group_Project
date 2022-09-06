@@ -1,0 +1,100 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ======= Header ======= -->
+{% include 'userapp/includes/inc_header.html' %}
+
+<!-- ======= Sidebar ======= -->
+{% include 'userapp/includes/inc_sidebar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Избранное</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'user:main' %}">Общая информация</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'user:profile' %}">Профиль</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'user:bookings' %}">Мои бронирования</a></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row align-items-top">
+            <div class="col-lg-9">
+                {% for favorite, favorite_images in favorites_dict.items %}
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                <!--                                   <div class="carousel-indicators">-->
+                                <!--                                        {% for image in favorite_images %}-->
+                                <!--                                        <button type="button" data-bs-target="#carouselExampleIndicators"-->
+                                <!--                                                data-bs-slide-to="{{ forloop.counter0 }}"-->
+                                <!--                                                class="{% if forloop.counter0 == 0 %}active{% endif %}"-->
+                                <!--                                                aria-current="true"-->
+                                <!--                                                aria-label="Slide {{ forloop.counter }}">-->
+                                <!--                                        </button>-->
+                                <!--                                        {% endfor %}-->
+                                <!--                                   </div>-->
+                                <div class="carousel-inner">
+                                    {% for image in favorite_images %}
+                                    <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                        <img src="/media/{{ image.image }}" class="d-block w-100" alt="...">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <!-- КНОПКИ НУЖНО ДОРАБАТЫВАТЬ - НУЖНО ПОРАБОТАТЬ С JS -->
+                                <!--                                    <button class="carousel-control-prev" type="button"-->
+                                <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                <!--                                            data-bs-slide="prev">-->
+                                <!--                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+                                <!--                                        <span class="visually-hidden">Назад</span>-->
+                                <!--                                    </button>-->
+                                <!--                                    <button class="carousel-control-next" type="button"-->
+                                <!--                                            data-bs-target="#carouselExampleIndicators"-->
+                                <!--                                            data-bs-slide="next">-->
+                                <!--                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+                                <!--                                        <span class="visually-hidden">Вперед</span>-->
+                                <!--                                    </button>-->
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <a href="{% url 'details:details' favorite.offer.pk %}">
+                                <h5 class="card-title">{{ favorite.offer.name }}</h5>
+                            </a>
+                            <p class="card-text">Стоимость: {{ favorite.offer.payment_per_hour }} руб/час</p>
+                            <p class="card-text" id="address">Адрес:
+                                г.{{ favorite.offer.address.city }}, {{ favorite.offer.address.street }},
+                                д. {{ favorite.offer.address.building }}</p>
+                            <p class="card-text">Телефон: {{ favorite.offer.phone_number }}</p>
+                            <p class="card-text">Рабочие места: {{ favorite.offer.seats_number }} шт</p>
+                            <p class="card-text">Время работы: с {{favorite.offer.start_working_hours|date:"H:i"}}
+                                    до {{favorite.offer.end_working_hours|date:"H:i"}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+{% include 'userapp/includes/inc_footer.html' %}
+{% endblock %}
+{% block js %}
+
+{% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

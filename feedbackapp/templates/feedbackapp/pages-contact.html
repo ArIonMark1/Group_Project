@@ -1,0 +1,113 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+   {% block content %}
+
+  <!-- ======= Header ======= -->
+  {% include 'userapp/includes/inc_header.html' %}
+
+  <!-- ======= Sidebar ======= -->
+  {% include 'feedbackapp/includes/inc_sidebar.html' %}
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Контакты</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'user:main' %}">Домой</a></li>
+          <li class="breadcrumb-item active">Контакты</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section contact">
+
+      <div class="row gy-4">
+
+        <div class="col-xl-6">
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-geo-alt"></i>
+                <h3>Адрес</h3>
+                <p>{{ contacts.first_address }}<br>{{ contacts.second_address }}</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-telephone"></i>
+                <h3>Телефон</h3>
+                <p>{{ contacts.first_phone }}<br>{{ contacts.second_phone }}</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-envelope"></i>
+                <h3>Email</h3>
+                <p>{{ contacts.first_mail }}<br>{{ contacts.second_mail }}</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="info-box card">
+                <i class="bi bi-clock"></i>
+                <h3>Время работы</h3>
+                <p>{{ contacts.working_days }}<br>{{ contacts.Opening_hours }}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card p-4">
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                    {{ message_form.name }}
+<!--                  <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>-->
+                </div>
+
+                <div class="col-md-6 ">
+                    {{ message_form.email }}
+<!--                  <input type="email" class="form-control" name="email" placeholder="Ваш Email" required>-->
+                </div>
+
+                <div class="col-md-12">
+                    {{ message_form.subject }}
+<!--                  <input type="text" class="form-control" name="subject" placeholder="Тема" required>-->
+                </div>
+
+                <div class="col-md-12">
+                    {{ message_form.message }}
+<!--                  <textarea class="form-control" name="message" rows="6" placeholder="Сообщение" required></textarea>-->
+                </div>
+
+                  {% if messages %}
+                    {% for message in messages %}
+                      <span class="badge bg-success">{{ message }}</span>
+                    {% endfor %}
+                  {% endif %}
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary">Отправить</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+  </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+  {% include 'userapp/includes/inc_footer.html' %}
+        {% endblock %}
+{% block js %}
+  {% include 'userapp/includes/inc_js.html' %}
+{% endblock %}

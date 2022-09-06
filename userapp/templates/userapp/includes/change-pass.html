@@ -1,0 +1,36 @@
+<form method="post" action="{% url 'user:profile' %}">
+    {% csrf_token %}
+    <div class="row mb-3">
+        <label for="{{ passwd_form.old_password.id_for_label }}"
+               class="col-md-4 col-lg-3 col-form-label">Текущий
+            пароль</label>
+        <div class="col-md-8 col-lg-9">
+            {{ passwd_form.old_password }}
+
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ passwd_form.new_password1.id_for_label }}"
+               class="col-md-4 col-lg-3 col-form-label">Новый
+            пароль</label>
+        <div class="col-md-8 col-lg-9">
+            {{ passwd_form.new_password1 }}
+
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="{{ passwd_form.new_password2.id_for_label }}"
+               class="col-md-4 col-lg-3 col-form-label">Повторите
+            новый пароль</label>
+        <div class="col-md-8 col-lg-9">
+            {{ passwd_form.new_password2 }}
+
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" name="change_password" class="btn btn-primary">Сменить пароль</button>
+    </div>
+</form>

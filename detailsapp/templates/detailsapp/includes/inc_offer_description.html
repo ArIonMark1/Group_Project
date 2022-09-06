@@ -1,0 +1,17 @@
+{% load static %}
+
+<div class="card-body card-desc">
+    <h5 class="card-title" style="margin-bottom: 0;">{{offer.name}}</h5>
+    <div class="desc-header" style="display:flex;">
+        <p class="desc-header-p">Площадь: {{offer.square}} м²</p>
+        <p class="desc-header-p">Количество мест: {{offer.seats_number}}</p>
+        <p class="desc-header-p">Время работы: с {{offer.start_working_hours}} до {{offer.end_working_hours}}</p>
+    </div>
+    <div class="full-desc" style="margin-top: 20px;">
+        <p>{{offer.description}} </p>
+    </div>
+    <div class="full-address" style="margin-top: 20px;">
+        <h5>Адрес</h5>
+        <p class="ymaps-geolink">{{offer_address.city}} ул. {{offer_address.street}}, {{offer_address.building}}</p>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="offer-title">
+    {% include 'detailsapp/includes/inc_offer_title.html' %}
+</div>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    {% include 'detailsapp/includes/inc_offer_photo.html' %}
+</div>
+<div class="card">
+    {% include 'detailsapp/includes/inc_offer_description.html' %}
+</div>
+<div class="card">
+    {% include 'detailsapp/includes/inc_offer_convenience.html' %}
+</div>
+{% if show %}
+<div class="users-review">
+    {% include 'detailsapp/includes/inc_offer_rating.html' %}
+</div>
+{% endif %}
+<div class="landlord">
+    {% include 'detailsapp/includes/inc_landlord_info.html' %}
+</div>

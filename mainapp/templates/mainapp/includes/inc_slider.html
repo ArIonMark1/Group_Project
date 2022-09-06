@@ -1,0 +1,45 @@
+{% load static %}
+<script type="text/javascript">
+    initDatePicker();
+</script>
+<section id="product" class="product text-center">
+            <div class="container">
+                <div class="main_product roomy-80">
+                    <div class="head_title text-center fix">
+                        <h2 class="text-uppercase text-black"> Самые популярные пространства 2022 года</h2>
+                    </div>
+
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <div class="container">
+                                    <div class="row">
+                                        {% for room, data in room_data.items %}
+                                        <div class="col-sm-4">
+                                            <div class="port_item xs-m-top-30">
+                                                <div class="port_img">
+                                                    <img src="{{ data.image.url }}" alt="" />
+                                                    <div class="port_overlay text-center">
+                                                        <a href="{{ data.image.url }}" class="popup-img">+</a>
+                                                    </div>
+                                                </div>
+                                                <div class="port_caption m-top-20">
+                                                     <a href="{% url 'details:details' room.pk %}" target="_blank">
+                                                        <h5>{{ room.name }}</h5>
+                                                        <h6>{{ room.address.city }}</h6>
+                                                         <h5> Рейтинг <strong>{{ data.rating }}</strong></h5>
+                                                     </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                </div><!-- End off row -->
+            </div><!-- End off container -->
+        </section><!-- End off Product section -->
